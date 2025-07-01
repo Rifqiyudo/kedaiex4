@@ -105,7 +105,10 @@
 
         <div class="mb-2">
             <strong>Pelanggan:</strong> {{ $order->user->name ?? '-' }}<br>
-            <strong>Email:</strong> {{ $order->user->email ?? '-' }}
+            <strong>Email:</strong> {{ $order->user->email ?? '-' }}    <br>
+            <strong>Telepon:</strong> {{ $order->user->no_telp ?? '-' }}<br>
+            <strong>Alamat:</strong> {{ $order->user->alamat ?? '-' }}  
+
         </div>
 
         <table class="table table-bordered mb-3">

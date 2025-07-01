@@ -234,6 +234,24 @@
                         @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="mb-4">
+                        <label for="alamat" class="form-label">
+                            <i class="bi bi-house me-2"></i>Alamat
+                        </label>
+                        <input type="text" class="form-control @error('alamat') is-invalid @enderror" 
+                               id="alamat" name="alamat" value="{{ old('alamat') }}" 
+                               required placeholder="Masukkan alamat lengkap Anda">
+                        @error('alamat')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+                    <div class="mb-4">
+                        <label for="no_telp" class="form-label">
+                            <i class="bi bi-phone me-2"></i>Nomor Telepon
+                        </label>
+                        <input type="number" class="form-control @error('no_telp') is-invalid @enderror" 
+                               id="no_telp" name="no_telp" value="{{ old('no_telp') }}" 
+                               required placeholder="Masukkan Nomor Telepon Anda">
+                        @error('no_telp')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+                    <div class="mb-4">
                         <label for="email" class="form-label">
                             <i class="bi bi-envelope me-2"></i>Email
                         </label>
@@ -241,7 +259,6 @@
                                id="email" name="email" value="{{ old('email') }}" 
                                required placeholder="Masukkan email Anda">
                         @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
                     <div class="mb-4">
                         <label for="password" class="form-label">
                             <i class="bi bi-lock me-2"></i>Password
@@ -262,6 +279,15 @@
                         <i class="bi bi-person-plus me-2"></i>Daftar Sekarang
                     </button>
                 </form>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="login-link">
                     <a href="{{ route('login') }}">
                         <i class="bi bi-box-arrow-in-left me-1"></i>Sudah punya akun? Login di sini

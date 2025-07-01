@@ -51,7 +51,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->session()->forget('user');
-        return redirect('/login');
+        return redirect('/');
     }
 
     public function showRegisterForm()
@@ -65,14 +65,25 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
+            'alamat' => 'required|string|max:255',
+            'no_telp' => 'required|string|max:20',
         ]);
-        $user = \App\Models\User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
-            'role' => 'pelanggan',
-        ]);
-        // Setelah register, redirect ke login (tidak auto-login)
+
+        try {
+            $user = \App\Models\User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => \Illuminate\Support\Facades\Hash::make($request->password),
+                'alamat' => $request->alamat,
+                'no_telp' => $request->no_telp,
+                'role' => 'pelanggan',
+            ]);
+
+            // dd($user); 
+        } catch (\Exception $e) {
+            // dd($e->getMessage()); 
+        }
+
         return redirect('/login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 } 

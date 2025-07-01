@@ -16,11 +16,32 @@
             <div class="row mb-2">
                 <div class="col-md-6">
                     <strong>Pelanggan:</strong> {{ $order->user ? $order->user->name : '-' }}<br>
-                    <strong>Email:</strong> {{ $order->user ? $order->user->email : '-' }}
+                    <strong>Email:</strong> {{ $order->user ? $order->user->email : '-' }}<br>
+                    <strong>Telepon:</strong> {{ $order->user ? $order->user->no_telp : '-' }}<br>
+                    <strong>Alamat:</strong> {{ $order->user ? $order->user->alamat : '-' }}<br>
+                    <strong>Tipe Pesanan: {{  \Illuminate\Support\Str::headline($order->tipe_pesanan) }}</strong><br>
+
                 </div>
                 <div class="col-md-6">
                     <strong>Tanggal:</strong> {{ $order->created_at->format('d-m-Y H:i') }}<br>
                     <strong>Status:</strong> <span class="badge bg-info">{{ ucfirst($order->status) }}</span>
+                    @if($order->status === 'selesai' && $order->ulasan)
+                    
+                        <div class="mb-2">
+                            <strong>Rating:</strong>
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if($i <= $order->ulasan->rating)
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                @else
+                                    <i class="bi bi-star text-muted"></i>
+                                @endif
+                            @endfor
+                        </div>
+                        <div class="mb-2">
+                            <strong>Ulasan:</strong>
+                            <div class="fst-italic">"{{ $order->ulasan->review }}"</div>
+                        </div>
+                    @endif
                 </div>
             </div>
             <form action="{{ route('admin.transaksi.updateStatus', $order->id) }}" method="POST" class="mb-3">

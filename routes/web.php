@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\UlasanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('auth.login'); // ganti sesuai lokasi file login kamu
-});
+    return view('welcome');
+})->name('welcome');
 
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -34,6 +35,8 @@ Route::middleware(['auth', 'role:pelanggan'])->prefix('pelanggan')->name('pelang
     Route::get('pesanan/{id}', [App\Http\Controllers\Pelanggan\OrderController::class, 'show'])->name('pesanan.show');
     Route::get('pesanan/{id}/bayar', [App\Http\Controllers\Pelanggan\OrderController::class, 'bayarForm'])->name('pesanan.bayar.form');
     Route::post('pesanan/{id}/bayar', [App\Http\Controllers\Pelanggan\OrderController::class, 'bayarProses'])->name('pesanan.bayar.proses');
+    Route::post('/ulasan/store', [UlasanController::class, 'store'])->name('ulasan.store');
+
 });
 
 Route::middleware(['auth', 'role:barista'])->prefix('barista')->name('barista.')->group(function () {

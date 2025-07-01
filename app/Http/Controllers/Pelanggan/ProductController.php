@@ -29,6 +29,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
+            'tipe_pesanan' => 'required|in:dikirim,makan_di_tempat',
             'qty' => 'required|integer|min:1',
         ]);
         $user = session('user');
@@ -46,10 +47,11 @@ class ProductController extends Controller
         }
         $total = $harga * $request->qty;
         $order = Order::create([
-            'user_id' => $user->id,
+            'user_id' => $user->id,        
+            'tipe_pesanan' => $request->tipe_pesanan,
             'total' => $total,
             'status' => 'pending',
-            'status_pembayaran' => 'pending',
+            'status_pembayaran' => 'belum dibayar',
         ]);
         OrderItem::create([
             'order_id' => $order->id,

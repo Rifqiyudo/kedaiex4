@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Barista;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Mail\PembayaranBerhasilMail;
+use Illuminate\Support\Facades\Mail;
 
 class TransaksiController extends Controller
 {
@@ -16,7 +18,7 @@ class TransaksiController extends Controller
 
     public function show($id)
     {
-        $order = Order::with(['user', 'orderItems.product'])->findOrFail($id);
+        $order = Order::with(['user', 'orderItems.product', 'ulasan'])->findOrFail($id);
         return view('barista.transaksi.show', compact('order'));
     }
 
@@ -28,6 +30,7 @@ class TransaksiController extends Controller
             $order->status = 'proses';
         }
         $order->save();
+        Mail::to($order->user->email)->send(new PembayaranBerhasilMail($order));
         return redirect()->route('barista.transaksi.show', $id)->with('success', 'Pembayaran berhasil diverifikasi!');
     }
 

@@ -30,7 +30,14 @@
                         <td>{{ $order->user->name ?? '-' }}</td>
                         <td>Rp {{ number_format($order->total,0,',','.') }}</td>
                         <td><span class="badge bg-{{ $order->status == 'proses' ? 'info' : ($order->status == 'selesai' ? 'success' : 'warning') }}">{{ ucfirst($order->status) }}</span></td>
-                        <td><span class="badge bg-{{ $order->status_pembayaran == 'paid' ? 'success' : 'warning' }}">{{ ucfirst($order->status_pembayaran) }}</span></td>
+                        <td>
+                            <span class="badge bg-{{ 
+                                $order->status_pembayaran == 'paid' ? 'success' : 
+                                ($order->status_pembayaran == 'pending' ? 'warning' : 'danger') 
+                            }}">
+                                {{ ucfirst($order->status_pembayaran) }}
+                            </span>
+                        </td>
                         <td>
                             <a href="{{ route('barista.transaksi.show', $order->id) }}" class="btn btn-sm btn-primary">Detail</a>
                         </td>

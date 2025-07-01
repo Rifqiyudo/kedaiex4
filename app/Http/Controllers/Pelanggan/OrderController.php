@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
+use App\Mail\PembayaranBerhasilMail;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -22,9 +24,10 @@ class OrderController extends Controller
     public function show($id)
     {
         $user = session('user');
-        $order = Order::with('orderItems.product')
+        $order = Order::with('orderItems.product', 'user', 'ulasan')
             ->where('user_id', $user->id)
             ->findOrFail($id);
+        // dd($order);
         return view('pelanggan.pesanan.show', compact('order'));
     }
 
@@ -66,6 +69,9 @@ class OrderController extends Controller
             $order->status = 'proses';
         }
         $order->save();
+        if ($order->status_pembayaran === 'paid') {
+            Mail::to($user->email)->send(new PembayaranBerhasilMail($order));
+        }
         return redirect()->route('pelanggan.pesanan.show', $order->id)->with('success', 'Pembayaran berhasil dikirim!');
     }
 }

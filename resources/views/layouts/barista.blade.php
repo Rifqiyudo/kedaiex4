@@ -6,6 +6,7 @@
     <title>@yield('title') - Barista Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="icon" href="{{ asset('images/logo.jpeg') }}" type="image/x-icon">
     <style>
         :root {
             --coffee-dark: #2C1810;
@@ -230,7 +231,7 @@
     <div class="d-flex">
         <div class="sidebar p-3">
             <h4 class="mb-4 d-flex align-items-center justify-content-center">
-                <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" style="height:36px; width:auto; border-radius:8px; margin-right:8px;">Kedai Barista
+                <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" style="height:36px; width:auto; border-radius:8px; margin-right:8px;">Kedai ExFour - Barista
             </h4>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2">

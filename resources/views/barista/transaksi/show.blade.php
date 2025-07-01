@@ -13,6 +13,9 @@
             <div class="col-md-6 mb-2 mb-md-0">
                 <div class="mb-2"><strong>Pelanggan:</strong> {{ $order->user->name ?? '-' }}</div>
                 <div class="mb-2"><strong>Email:</strong> {{ $order->user->email ?? '-' }}</div>
+                <div class="mb-2"><strong>Nomor Telepon:</strong> {{ $order->user->no_telp ?? '-' }}</div>
+                <div class="mb-2"><strong>Alamat:</strong> {{ $order->user->alamat ?? '-' }}</div>
+                 <div class="mb-2"><strong>Tipe Pesanan: {{  \Illuminate\Support\Str::headline($order->tipe_pesanan) }}</strong><br></div>
                 <div class="mb-2"><strong>Bukti Pembayaran:</strong><br>
                     @if($order->bukti_pembayaran)
                         <div class="p-2 bg-light border rounded" style="max-width:220px;">
@@ -31,6 +34,23 @@
                 <div class="mb-2">
                     <strong>Status Pembayaran:</strong> <span class="badge bg-{{ $order->status_pembayaran == 'paid' ? 'success' : 'warning' }} fs-6">{{ ucfirst($order->status_pembayaran) }}</span>
                 </div>
+                @if($order->status === 'selesai' && $order->ulasan)
+                
+                    <div class="mb-2">
+                        <strong>Rating:</strong>
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if($i <= $order->ulasan->rating)
+                                <i class="bi bi-star-fill text-warning"></i>
+                            @else
+                                <i class="bi bi-star text-muted"></i>
+                            @endif
+                        @endfor
+                    </div>
+                    <div class="mb-2">
+                        <strong>Ulasan:</strong>
+                        <div class="fst-italic">"{{ $order->ulasan->review }}"</div>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="d-flex flex-wrap gap-2 mb-3">

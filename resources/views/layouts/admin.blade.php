@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - @yield('title', 'Dashboard')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ asset('images/logo.jpeg') }}" type="image/x-icon">
     <style>
         :root {
             --coffee-dark: #2C1810;
@@ -247,7 +248,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" style="height:32px; width:auto; border-radius:8px; margin-right:8px;">Kedai exfour Admin
+            <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" style="height:32px; width:auto; border-radius:8px; margin-right:8px;">Kedai ExFour - Admin
         </a>
         <div class="dropdown ms-auto">
             <a class="btn btn-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -283,13 +284,13 @@
                     </li>
                    
                     <li class="nav-item mb-2">
-                        <a class="nav-link @if(request()->is('admin/produk*')) active @endif" href="/admin/produk">
-                            <i class="bi bi-box-seam"></i> Produk
+                        <a class="nav-link @if(request()->is('admin/kategori*')) active @endif" href="/admin/kategori">
+                            <i class="bi bi-tags-fill"></i> Kategori
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a class="nav-link @if(request()->is('admin/kategori*')) active @endif" href="/admin/kategori">
-                            <i class="bi bi-tags-fill"></i> Kategori
+                        <a class="nav-link @if(request()->is('admin/produk*')) active @endif" href="/admin/produk">
+                            <i class="bi bi-box-seam"></i> Produk
                         </a>
                     </li>
                     <li class="nav-item mb-2">

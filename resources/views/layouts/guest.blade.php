@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="icon" href="{{ asset('images/logo.jpeg') }}" type="image/x-icon">
     <style>
+    
         :root {
             --coffee-dark: #2C1810;
             --coffee-medium: #5D4037;
@@ -28,7 +29,7 @@
             padding-top: 80px;
         }
         
-         .navbar-custom {
+        .navbar-custom {
             background: linear-gradient(135deg, var(--coffee-dark) 0%, var(--coffee-medium) 100%) !important;
             box-shadow: 0 4px 12px rgba(44, 24, 16, 0.15);
             border-bottom: 3px solid var(--accent-gold);
@@ -53,12 +54,13 @@
             color: var(--accent-gold) !important;
         }
 
+
         .nav-link {
             color: var(--cream) !important;
             font-weight: 500;
             transition: all 0.3s ease;
             padding: 8px 16px;
-            border-radius: 0;
+            border-radius: 0; 
             margin: 0 4px;
             position: relative;
         }
@@ -102,7 +104,7 @@
             }
 
             body {
-                padding-top: 100px; 
+                padding-top: 100px;
             }
         }
         .btn-outline-light {
@@ -380,7 +382,6 @@
         .star.selected {
             color: #ffc107 !important;
         }
-
         .produk-scroll-wrapper {
         display: flex;
         gap: 1.5rem;
@@ -455,7 +456,7 @@
         top: 50%;
         transform: translateY(-50%);
         z-index: 10;
-        background-color: rgba(74, 103, 65, 0.9);
+        background-color: rgba(74, 103, 65, 0.9); /* warna #4A6741 dengan transparansi */
         color: white;
         border: none;
         border-radius: 50%;
@@ -480,6 +481,7 @@
     .btn-panah.right {
         right: -20px;
     }
+    
     ::-webkit-scrollbar {
         width: 14px;
         height: 18px;
@@ -491,66 +493,59 @@
     }
 
     ::-webkit-scrollbar-thumb {
-        background: var(--accent-gold);
+        background: var(--accent-gold); 
         border-radius: 10px;
         border: 2px solid #f3f1e7; 
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: #d4af37cc; 
+        background: #d4af37cc;
     }
 
-    .user-info::after {
-        display: none !important;
-    }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{{ route('pelanggan.produk.index') }}">
-                <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" style="height:32px; width:auto; border-radius:8px; margin-right:8px;">Kedai ExFour
-            </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('pelanggan.beranda') ? 'active' : '' }}" href="{{ route('pelanggan.beranda') }}">
-                            </i>Beranda
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('pelanggan.produk.*') ? 'active' : '' }}" href="{{ route('pelanggan.produk.index') }}">
-                            Produk
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('pelanggan.pesanan.*') ? 'active' : '' }}" href="{{ route('pelanggan.pesanan.index') }}">
-                            Pesanan Saya
-                        </a>
-                    </li>
-                </ul>
-                
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle user-info" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle me-1"></i>Selamat Datang, {{ session('user')->name }}!
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="bi bi-box-arrow-right me-2"></i>Logout
-                            </a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <div class="container">
+        {{-- Logo di kiri --}}
+        <a class="navbar-brand d-flex align-items-center" href="{{ route('pelanggan.produk.index') }}">
+            <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" style="height:32px; width:auto; border-radius:8px; margin-right:8px;">
+            Kedai ExFour
+        </a>
+
+        {{-- Toggle tombol untuk mobile --}}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        {{-- Menu navigasi di kanan --}}
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}" href="{{ route('welcome') }}">
+                        Beranda
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('pelanggan.produk.*') ? 'active' : '' }}" href="{{ route('pelanggan.produk.index') }}">
+                       Produk
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('pelanggan.pesanan.*') ? 'active' : '' }}" href="{{ route('pelanggan.pesanan.index') }}">
+                        Pesanan Saya
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0" href="{{ route('login') }}" style="border-radius: 30px;">
+                        <i class="bi bi-box-arrow-in-right me-1"></i>Masuk
+                    </a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+
 
     <!-- Main Content -->
     <div class="main-content fade-in">
@@ -595,67 +590,69 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const stars = document.querySelectorAll('#starRating .star');
-            const ratingInput = document.getElementById('rating');
+    document.addEventListener('DOMContentLoaded', function () {
+        const stars = document.querySelectorAll('#starRating .star');
+        const ratingInput = document.getElementById('rating');
 
-            stars.forEach(star => {
-                star.addEventListener('click', function () {
-                    const rating = this.getAttribute('data-value');
-                    ratingInput.value = rating;
+        stars.forEach(star => {
+            star.addEventListener('click', function () {
+                const rating = this.getAttribute('data-value');
+                ratingInput.value = rating;
 
-                    stars.forEach(s => s.classList.remove('selected'));
+                stars.forEach(s => s.classList.remove('selected'));
 
-                    for (let i = 0; i < rating; i++) {
-                        stars[i].classList.add('selected');
-                    }
-                });
+                for (let i = 0; i < rating; i++) {
+                    stars[i].classList.add('selected');
+                }
             });
         });
-    </script>
-    <script>
-        const slider = document.getElementById('produkScroll');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+    });
+</script>
 
-        slider.addEventListener('mousedown', (e) => {
-            isDown = true;
-            slider.classList.add('dragging');
-            startX = e.pageX - slider.offsetLeft;
-            scrollLeft = slider.scrollLeft;
-            e.preventDefault(); // cegah text selection
-        });
+<script>
+    const slider = document.getElementById('produkScroll');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-        slider.addEventListener('mouseleave', () => {
-            isDown = false;
-            slider.classList.remove('dragging');
-        });
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('dragging');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+        e.preventDefault(); // cegah text selection
+    });
 
-        slider.addEventListener('mouseup', () => {
-            isDown = false;
-            slider.classList.remove('dragging');
-        });
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('dragging');
+    });
 
-        slider.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault(); // penting supaya nggak ngereset scroll
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 1.2; // nilai geser
-            slider.scrollLeft = scrollLeft - walk;
-        });
-    </script>
-    <script>
-        const scrollContainer = document.getElementById('produkScroll');
-        const scrollAmount = scrollContainer.clientWidth; // geser 1 layar penuh
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('dragging');
+    });
 
-        document.getElementById('scrollLeft').addEventListener('click', () => {
-            scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        });
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault(); // penting supaya nggak ngereset scroll
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 1.2; // nilai geser
+        slider.scrollLeft = scrollLeft - walk;
+    });
+</script>
+<script>
+    const scrollContainer = document.getElementById('produkScroll');
+    const scrollAmount = scrollContainer.clientWidth; // geser 1 layar penuh
 
-        document.getElementById('scrollRight').addEventListener('click', () => {
-            scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        });
-    </script>
+    document.getElementById('scrollLeft').addEventListener('click', () => {
+        scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    document.getElementById('scrollRight').addEventListener('click', () => {
+        scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+</script>
+
 </body>
 </html> 
