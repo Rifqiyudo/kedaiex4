@@ -42,6 +42,12 @@ class ProductController extends Controller
         }
 
         Product::create($data);
+       
+        $product = Product::latest()->first();
+        $product->stockHistories()->create([
+            'jumlah' => $data['stok'],
+            'tipe' => 'masuk', 
+        ]); 
         return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil ditambahkan');
     }
 

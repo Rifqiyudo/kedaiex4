@@ -63,6 +63,12 @@ class ProductController extends Controller
         // Kurangi stok produk
         $product->stok -= $request->qty;
         $product->save();
+        // Tambah histori stok
+        $product->stockHistories()->create([
+            'product_id' => $product->id,
+            'jumlah' => -$request->qty, 
+            'tipe' => 'keluar', 
+        ]);
         return redirect()->route('pelanggan.pesanan.index')->with('success', 'Pesanan berhasil dibuat!');
     }
 }

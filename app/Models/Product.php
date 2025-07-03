@@ -25,6 +25,10 @@ class Product extends Model
 
     public function orderItems()
     {
-        return $this->hasMany(\App\Models\OrderItem::class);
+        return $this->hasMany(OrderItem::class);
+    }
+    public function stockHistories()
+    {
+        return $this->hasMany(StockHistories::class);
     }
 } 
