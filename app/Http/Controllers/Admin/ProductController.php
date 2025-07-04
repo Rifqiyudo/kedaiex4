@@ -92,6 +92,8 @@ class ProductController extends Controller
         if ($product->foto && Storage::disk('public')->exists($product->foto)) {
             Storage::disk('public')->delete($product->foto);
         }
+        // Hapus semua histori stok yang terkait produk
+        $product->stockHistories()->delete();
 
         $product->delete();
         return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil dihapus');
