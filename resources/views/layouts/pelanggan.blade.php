@@ -531,6 +531,16 @@
                             Produk
                         </a>
                     </li>
+                    <li class="nav-item position-relative">
+                        <a class="nav-link {{ request()->routeIs('pelanggan.cart.*') ? 'active' : '' }}" href="{{ route('pelanggan.cart.index') }}">
+                            Keranjang Saya
+                            @if($cartCount > 0)
+                                <span class="badge bg-danger rounded-pill position-absolute top-20 start-100 translate-middle p-1 px-2" style="font-size: 0.65rem;">
+                                    {{ $cartCount }}
+                                </span>
+                            @endif
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('pelanggan.pesanan.*') ? 'active' : '' }}" href="{{ route('pelanggan.pesanan.index') }}">
                             Pesanan Saya

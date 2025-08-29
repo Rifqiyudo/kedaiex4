@@ -393,116 +393,116 @@
         cursor: grab;
          
         padding-bottom: 1rem;
-    }   
-    
-    .produk-scroll-wrapper.dragging {
-        cursor: grabbing;
-    }
-
-    .produk-scroll-wrapper::-webkit-scrollbar {
-        display: none;
-    }
-
-    .produk-card {
-        flex: 0 0 calc((100% - 3rem) / 3);
-        max-width: calc((100% - 3rem) / 3);
-        background: white;
-        border-radius: 15px;
-        overflow: hidden;   
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        transition: transform 0.3s ease;
-    }
-
-    .produk-card:hover {
-        transform: scale(1.03);
-    }
-
-    .produk-img {
-        height: 400px;
-        overflow: hidden;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-    }
-
-    .produk-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-    }
-
-    .produk-img:hover img {
-        transform: scale(1.05);
-    }
-
-    @media (max-width: 992px) {
-        .produk-card {
-            flex: 0 0 70%;
-            max-width: 70%;
+        }   
+        
+        .produk-scroll-wrapper.dragging {
+            cursor: grabbing;
         }
-    }
 
-    @media (max-width: 576px) {
-        .produk-card {
-            flex: 0 0 90%;
-            max-width: 90%;
+        .produk-scroll-wrapper::-webkit-scrollbar {
+            display: none;
         }
-    }
 
-    .position-relative {
-    position: relative;
-    }
+        .produk-card {
+            flex: 0 0 calc((100% - 3rem) / 3);
+            max-width: calc((100% - 3rem) / 3);
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;   
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
 
-    .btn-panah {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 10;
-        background-color: rgba(74, 103, 65, 0.9); /* warna #4A6741 dengan transparansi */
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
+        .produk-card:hover {
+            transform: scale(1.03);
+        }
 
-    .btn-panah:hover {
-        background-color: #4A6741;
-    }
+        .produk-img {
+            height: 400px;
+            overflow: hidden;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
 
-    .btn-panah.left {
-        left: -20px;
-    }
+        .produk-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
 
-    .btn-panah.right {
-        right: -20px;
-    }
-    
-    ::-webkit-scrollbar {
-        width: 14px;
-        height: 18px;
-    }
+        .produk-img:hover img {
+            transform: scale(1.05);
+        }
 
-    ::-webkit-scrollbar-track {
-        background: #f3f1e7; 
-        border-radius: 10px;
-    }
+        @media (max-width: 992px) {
+            .produk-card {
+                flex: 0 0 70%;
+                max-width: 70%;
+            }
+        }
 
-    ::-webkit-scrollbar-thumb {
-        background: var(--accent-gold); 
-        border-radius: 10px;
-        border: 2px solid #f3f1e7; 
-    }
+        @media (max-width: 576px) {
+            .produk-card {
+                flex: 0 0 90%;
+                max-width: 90%;
+            }
+        }
 
-    ::-webkit-scrollbar-thumb:hover {
-        background: #d4af37cc;
-    }
+        .position-relative {
+        position: relative;
+        }
+
+        .btn-panah {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background-color: rgba(74, 103, 65, 0.9); /* warna #4A6741 dengan transparansi */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        .btn-panah:hover {
+            background-color: #4A6741;
+        }
+
+        .btn-panah.left {
+            left: -20px;
+        }
+
+        .btn-panah.right {
+            right: -20px;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 14px;
+            height: 18px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f3f1e7; 
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gold); 
+            border-radius: 10px;
+            border: 2px solid #f3f1e7; 
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37cc;
+        }
 
     </style>
 </head>
@@ -531,6 +531,11 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('pelanggan.produk.*') ? 'active' : '' }}" href="{{ route('pelanggan.produk.index') }}">
                        Produk
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('pelanggan.cart.*') ? 'active' : '' }}" href="{{ route('pelanggan.cart.index') }}">
+                        Keranjang Saya
                     </a>
                 </li>
                 <li class="nav-item">

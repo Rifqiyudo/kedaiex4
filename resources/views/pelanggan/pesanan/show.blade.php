@@ -19,6 +19,7 @@
                 <p><strong>Tanggal:</strong> {{ $order->created_at->format('d-m-Y H:i') }}</p>
                 <p><strong>Status:</strong> <span class="badge bg-{{ $order->status == 'pending' ? 'warning' : ($order->status == 'completed' ? 'success' : 'info') }}">{{ ucfirst($order->status) }}</span></p>
                 <p><strong>Tipe Pesanan: {{  \Illuminate\Support\Str::headline($order->tipe_pesanan) }}</strong></p>
+                <p><strong>Metode Pembayaran: {{  \Illuminate\Support\Str::headline($order->metode_pembayaran) }}</strong></p>
             </div>
             <div class="col-md-4">
                 <h5>Informasi Pelanggan</h5>
@@ -84,9 +85,8 @@
         </div>
         
         <div class="text-end">
-            @if ($order->status_pembayaran === 'belum dibayar')
-                <a href="{{ route('pelanggan.pesanan.bayar.form', $order->id) }}" class="btn btn-primary me-2">Bayar</a>
-            @elseif ($order->status_pembayaran === 'pending')
+            
+            @if ($order->status_pembayaran === 'pending')
                 <button class="btn btn-primary me-2" disabled>Menunggu Konfirmasi</button>
             @endif
 

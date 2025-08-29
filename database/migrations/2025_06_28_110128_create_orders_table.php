@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('tipe_pesanan');
             $table->decimal('total', 12, 2);
-            $table->enum('status', ['pending', 'proses', 'selesai', 'batal'])->default('pending');
+            $table->enum('status', ['pending', 'proses', 'pesanan siap', 'dikirim', 'sampai', 'selesai', 'batal'])->default('pending');
             $table->string('metode_pembayaran')->nullable();
             $table->string('status_pembayaran')->default('pending');
             $table->string('bukti_pembayaran')->nullable();

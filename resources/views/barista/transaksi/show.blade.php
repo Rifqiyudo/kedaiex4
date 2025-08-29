@@ -16,15 +16,8 @@
                 <div class="mb-2"><strong>Nomor Telepon:</strong> {{ $order->user->no_telp ?? '-' }}</div>
                 <div class="mb-2"><strong>Alamat:</strong> {{ $order->user->alamat ?? '-' }}</div>
                  <div class="mb-2"><strong>Tipe Pesanan: {{  \Illuminate\Support\Str::headline($order->tipe_pesanan) }}</strong><br></div>
-                <div class="mb-2"><strong>Bukti Pembayaran:</strong><br>
-                    @if($order->bukti_pembayaran)
-                        <div class="p-2 bg-light border rounded" style="max-width:220px;">
-                            <img src="{{ asset('storage/' . $order->bukti_pembayaran) }}" alt="Bukti Pembayaran" style="max-width:200px; border-radius:8px;">
-                        </div>
-                    @else
-                        <span class="text-danger">Belum ada</span>
-                    @endif
-                </div>
+                 <div class="mb-2"><strong>Metode Pembayaran: {{  \Illuminate\Support\Str::headline($order->metode_pembayaran) }}</strong><br></div>
+                
             </div>
             <div class="col-md-6 text-md-end">
                 <div class="mb-2"><strong>Tanggal:</strong> {{ $order->created_at->timezone('Asia/Jakarta')->format('d-m-Y H:i') }} WIB</div>
@@ -54,15 +47,42 @@
             </div>
         </div>
         <div class="d-flex flex-wrap gap-2 mb-3">
-            @if($order->status_pembayaran !== 'paid')
+            {{-- Verifikasi pembayaran --}}
+            @if($order->status_pembayaran !== 'Paid' && $order->status === 'pending')
                 <form action="{{ route('barista.transaksi.verifikasi', $order->id) }}" method="POST" class="d-inline">
                     @csrf
                     <button type="submit" class="btn btn-success">Verifikasi Pembayaran</button>
                 </form>
             @endif
+
+            {{-- Makan di tempat -> Pesanan Siap --}}
+            @if($order->tipe_pesanan === 'makan_di_tempat' && $order->status === 'proses')
+                <form action="{{ route('barista.transaksi.siap', $order->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Pesanan Siap</button>
+                </form>
+            @endif
+
+            {{-- Diantar -> Pesanan Dikirim --}}
+            @if($order->tipe_pesanan === 'diantar' && $order->status === 'proses')
+                <form action="{{ route('barista.transaksi.kirim', $order->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-info">Pesanan Dikirim</button>
+                </form>
+            @endif
+
+            {{-- Diantar -> Pesanan Sampai --}}
+            @if($order->tipe_pesanan === 'diantar' && $order->status === 'dikirim')
+                <form action="{{ route('barista.transaksi.sampai', $order->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Pesanan Sampai</button>
+                </form>
+            @endif
+
             <a href="{{ route('barista.transaksi.cetak_struk', $order->id) }}" class="btn btn-secondary" target="_blank">Cetak Struk</a>
             <a href="{{ route('barista.transaksi.index') }}" class="btn btn-outline-primary">Kembali</a>
         </div>
+
     </div>
 </div>
 <div class="card shadow-sm">

@@ -43,50 +43,79 @@ class ProductController extends Controller
         return view('pelanggan.produk.index', compact('products', 'promo', 'categories'));
     }
 
-    public function order(Request $request)
+    // public function order(Request $request)
+    // {
+    //     $request->validate([
+    //         'product_id' => 'required|exists:products,id',
+    //         'tipe_pesanan' => 'required|in:dikirim,makan_di_tempat',
+    //         'qty' => 'required|integer|min:1',
+    //     ]);
+    //     $user = session('user');
+    //     $product = Product::findOrFail($request->product_id);
+    //     $today = date('Y-m-d');
+    //     $promo = \App\Models\Promo::where('status', 'aktif')
+    //         ->where('tanggal_mulai', '<=', $today)
+    //         ->where('tanggal_berakhir', '>=', $today)
+    //         ->orderByDesc('diskon')
+    //         ->first();
+    //     $harga = $product->harga;
+    //     if ($promo) {
+    //         $harga = $harga - ($harga * $promo->diskon / 100);
+    //     }
+    //     $total = $harga * $request->qty;
+    //     $order = Order::create([
+    //         'user_id' => $user->id,        
+    //         'tipe_pesanan' => $request->tipe_pesanan,
+    //         'total' => $total,
+    //         'status' => 'pending',
+    //         'status_pembayaran' => 'belum dibayar',
+    //     ]);
+    //     OrderItem::create([
+    //         'order_id' => $order->id,
+    //         'product_id' => $product->id,
+    //         'qty' => $request->qty,
+    //         'harga' => $harga,
+    //         'subtotal' => $total,
+    //     ]);
+    //     $product->stok -= $request->qty;
+    //     $product->save();
+    //     $product->stockHistories()->create([
+    //         'product_id' => $product->id,
+    //         'jumlah' => -$request->qty, 
+    //         'tipe' => 'keluar', 
+    //     ]);
+    //     return redirect()->route('pelanggan.pesanan.index')->with('success', 'Pesanan berhasil dibuat!');
+    // }
+
+    public function addToCart(Request $request)
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
-            'tipe_pesanan' => 'required|in:dikirim,makan_di_tempat',
             'qty' => 'required|integer|min:1',
         ]);
+
         $user = session('user');
         $product = Product::findOrFail($request->product_id);
-        // Cek promo aktif
-        $today = date('Y-m-d');
-        $promo = \App\Models\Promo::where('status', 'aktif')
-            ->where('tanggal_mulai', '<=', $today)
-            ->where('tanggal_berakhir', '>=', $today)
-            ->orderByDesc('diskon')
+
+        // cek apakah sudah ada produk ini di cart
+        $cartItem = \App\Models\Cart::where('user_id', $user->id)
+            ->where('product_id', $product->id)
+            ->where('status', 'Belum Checkout')
             ->first();
-        $harga = $product->harga;
-        if ($promo) {
-            $harga = $harga - ($harga * $promo->diskon / 100);
+
+        if ($cartItem) {
+            $cartItem->qty += $request->qty;
+            $cartItem->save();
+        } else {
+            \App\Models\Cart::create([
+                'user_id' => $user->id,
+                'product_id' => $product->id,
+                'qty' => $request->qty,
+                'status' => 'Belum Checkout',
+            ]);
         }
-        $total = $harga * $request->qty;
-        $order = Order::create([
-            'user_id' => $user->id,        
-            'tipe_pesanan' => $request->tipe_pesanan,
-            'total' => $total,
-            'status' => 'pending',
-            'status_pembayaran' => 'belum dibayar',
-        ]);
-        OrderItem::create([
-            'order_id' => $order->id,
-            'product_id' => $product->id,
-            'qty' => $request->qty,
-            'harga' => $harga,
-            'subtotal' => $total,
-        ]);
-        // Kurangi stok produk
-        $product->stok -= $request->qty;
-        $product->save();
-        // Tambah histori stok
-        $product->stockHistories()->create([
-            'product_id' => $product->id,
-            'jumlah' => -$request->qty, 
-            'tipe' => 'keluar', 
-        ]);
-        return redirect()->route('pelanggan.pesanan.index')->with('success', 'Pesanan berhasil dibuat!');
+
+        return redirect()->route('pelanggan.produk.index')->with('success', 'Produk ditambahkan ke keranjang!');
     }
+
 }

@@ -75,4 +75,34 @@ class TransaksiController extends Controller
         $order = Order::with(['user', 'orderItems.product'])->findOrFail($id);
         return view('barista.transaksi.cetak_struk', compact('order'));
     }
+
+    public function pesananSiap($id)
+    {
+        $order = Order::findOrFail($id);
+        if ($order->status === 'proses' && $order->tipe_pesanan === 'makan_di_tempat') {
+            $order->status = 'pesanan siap';
+            $order->save();
+        }
+        return redirect()->route('barista.transaksi.show', $id)->with('success', 'Pesanan sudah siap disajikan!');
+    }
+
+    public function pesananDikirim($id)
+    {
+        $order = Order::findOrFail($id);
+        if ($order->status === 'proses' && $order->tipe_pesanan === 'diantar') {
+            $order->status = 'dikirim';
+            $order->save();
+        }
+        return redirect()->route('barista.transaksi.show', $id)->with('success', 'Pesanan sedang dikirim!');
+    }
+
+    public function pesananSampai($id)
+    {
+        $order = Order::findOrFail($id);
+        if ($order->status === 'dikirim' && $order->tipe_pesanan === 'diantar') {
+            $order->status = 'sampai';
+            $order->save();
+        }
+        return redirect()->route('barista.transaksi.show', $id)->with('success', 'Pesanan sudah sampai!');
+    }
 } 

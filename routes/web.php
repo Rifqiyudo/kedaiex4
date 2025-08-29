@@ -27,12 +27,16 @@ Route::middleware(['auth', 'role:pelanggan'])->prefix('pelanggan')->name('pelang
     Route::get('/', function() { return redirect()->route('pelanggan.beranda'); });
     Route::get('beranda', [App\Http\Controllers\Pelanggan\BerandaController::class, 'index'])->name('beranda');
     Route::get('produk', [App\Http\Controllers\Pelanggan\ProductController::class, 'index'])->name('produk.index');
-    Route::post('produk/pesan', [App\Http\Controllers\Pelanggan\ProductController::class, 'order'])->name('produk.order');
+    Route::post('produk/add-to-cart', [App\Http\Controllers\Pelanggan\ProductController::class, 'addToCart'])->name('produk.addToCart');
     Route::get('pesanan', [App\Http\Controllers\Pelanggan\OrderController::class, 'index'])->name('pesanan.index');
     Route::get('pesanan/{id}', [App\Http\Controllers\Pelanggan\OrderController::class, 'show'])->name('pesanan.show');
     Route::get('pesanan/{id}/bayar', [App\Http\Controllers\Pelanggan\OrderController::class, 'bayarForm'])->name('pesanan.bayar.form');
     Route::post('pesanan/{id}/bayar', [App\Http\Controllers\Pelanggan\OrderController::class, 'bayarProses'])->name('pesanan.bayar.proses');
     Route::post('/ulasan/store', [UlasanController::class, 'store'])->name('ulasan.store');
+    Route::get('cart', [App\Http\Controllers\Pelanggan\CartController::class, 'index'])->name('cart.index');
+    Route::delete('cart/{id}', [App\Http\Controllers\Pelanggan\CartController::class, 'destroy'])->name('cart.destroy');
+    Route::post('cart/checkout', [App\Http\Controllers\Pelanggan\CartController::class, 'checkoutPage'])->name('cart.checkout');
+    Route::post('checkout/store', [App\Http\Controllers\Pelanggan\CheckoutController::class, 'store'])->name('checkout.store');
 
 });
 
@@ -41,6 +45,9 @@ Route::middleware(['auth', 'role:barista'])->prefix('barista')->name('barista.')
     Route::get('transaksi/{id}', [App\Http\Controllers\Barista\TransaksiController::class, 'show'])->name('transaksi.show');
     Route::post('transaksi/{id}/verifikasi', [App\Http\Controllers\Barista\TransaksiController::class, 'verifikasiPembayaran'])->name('transaksi.verifikasi');
     Route::get('transaksi/{id}/cetak-struk', [App\Http\Controllers\Barista\TransaksiController::class, 'cetakStruk'])->name('transaksi.cetak_struk');
+     Route::post('transaksi/{id}/siap', [App\Http\Controllers\Barista\TransaksiController::class, 'pesananSiap'])->name('transaksi.siap');
+    Route::post('transaksi/{id}/kirim', [App\Http\Controllers\Barista\TransaksiController::class, 'pesananDikirim'])->name('transaksi.kirim');
+    Route::post('transaksi/{id}/sampai', [App\Http\Controllers\Barista\TransaksiController::class, 'pesananSampai'])->name('transaksi.sampai');
 });
 
 Route::get('/login', [App\Http\Controllers\AuthController::class, 'showLoginForm'])->name('login');
@@ -48,3 +55,4 @@ Route::post('/login', [App\Http\Controllers\AuthController::class, 'login']);
 Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [App\Http\Controllers\AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [App\Http\Controllers\AuthController::class, 'register']);
+Route::post('/midtrans/callback', [App\Http\Controllers\Pelanggan\MidtransCallbackController::class, 'handle']);

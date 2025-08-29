@@ -57,18 +57,11 @@
                 <p class="card-text mb-1"><strong>Stok:</strong> {{ $product->stok }}</p>
                 <p class="card-text">{{ $product->deskripsi }}</p>
                 @if($product->stok > 0)
-                <form action="{{ route('pelanggan.produk.order') }}" method="POST" class="d-flex align-items-center gap-2">
+                <form action="{{ route('pelanggan.produk.addToCart') }}" method="POST" class="d-flex align-items-center gap-2">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <div class="col-auto">
-                        <select name="tipe_pesanan" id="tipe_pesanan" class="form-select form-select-sm" required>
-                            <option value="" disabled selected>Pilih Tipe Pesanan</option>
-                            <option value="dikirim">Dikirim</option>
-                            <option value="makan_di_tempat">Makan di Tempat</option>
-                        </select>
-                    </div>
                     <input type="number" name="qty" value="1" min="1" max="{{ $product->stok }}" class="form-control form-control-sm" style="width: 70px;">
-                    <button type="submit" class="btn btn-sm btn-primary">Pesan</button>
+                    <button type="submit" class="btn btn-sm btn-primary">Tambah ke Keranjang</button>
                 </form>
                 @else
                 <span class="badge bg-danger">Stok Habis</span>

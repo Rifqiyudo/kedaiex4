@@ -20,6 +20,7 @@
                     <strong>Telepon:</strong> {{ $order->user ? $order->user->no_telp : '-' }}<br>
                     <strong>Alamat:</strong> {{ $order->user ? $order->user->alamat : '-' }}<br>
                     <strong>Tipe Pesanan: {{  \Illuminate\Support\Str::headline($order->tipe_pesanan) }}</strong><br>
+                    <strong>Metode Pembayaran: {{  \Illuminate\Support\Str::headline($order->metode_pembayaran) }}</strong><br>
 
                 </div>
                 <div class="col-md-6">
@@ -95,13 +96,6 @@
             </div>
         </div>
     </div>
-    <div class="mb-3">
-        <strong>Bukti Pembayaran:</strong><br>
-        @if($order->bukti_pembayaran)
-            <img src="{{ asset('storage/' . $order->bukti_pembayaran) }}" alt="Bukti Pembayaran" style="max-width:300px; border-radius:8px;">
-        @else
-            <span class="text-danger">Belum ada</span>
-        @endif
-    </div>
+    
 </div>
 @endsection 
