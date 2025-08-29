@@ -13,25 +13,27 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('admin.promo.update', $id) }}" method="POST">
+            <form action="{{ route('admin.promo.update', $promo->id) }}" method="POST">
                 @csrf
                 @method('PUT')
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Promo</label>
                             <input type="text" class="form-control @error('nama') is-invalid @enderror" 
-                                   id="nama" name="nama" value="{{ old('nama') }}" required>
+                                   id="nama" name="nama" value="{{ old('nama', $promo->nama) }}" required>
                             @error('nama')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="diskon" class="form-label">Diskon (%)</label>
                             <input type="number" class="form-control @error('diskon') is-invalid @enderror" 
-                                   id="diskon" name="diskon" value="{{ old('diskon') }}" min="0" max="100" required>
+                                   id="diskon" name="diskon" value="{{ old('diskon', $promo->diskon) }}" min="0" max="100" required>
                             @error('diskon')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -42,7 +44,7 @@
                 <div class="mb-3">
                     <label for="deskripsi" class="form-label">Deskripsi</label>
                     <textarea class="form-control @error('deskripsi') is-invalid @enderror" 
-                              id="deskripsi" name="deskripsi" rows="3" required>{{ old('deskripsi') }}</textarea>
+                              id="deskripsi" name="deskripsi" rows="3" required>{{ old('deskripsi', $promo->deskripsi) }}</textarea>
                     @error('deskripsi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -53,17 +55,18 @@
                         <div class="mb-3">
                             <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
                             <input type="date" class="form-control @error('tanggal_mulai') is-invalid @enderror" 
-                                   id="tanggal_mulai" name="tanggal_mulai" value="{{ old('tanggal_mulai') }}" required>
+                                   id="tanggal_mulai" name="tanggal_mulai" value="{{ old('tanggal_mulai', $promo->tanggal_mulai->format('Y-m-d')) }}" required>
                             @error('tanggal_mulai')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="tanggal_berakhir" class="form-label">Tanggal Berakhir</label>
                             <input type="date" class="form-control @error('tanggal_berakhir') is-invalid @enderror" 
-                                   id="tanggal_berakhir" name="tanggal_berakhir" value="{{ old('tanggal_berakhir') }}" required>
+                                   id="tanggal_berakhir" name="tanggal_berakhir" value="{{ old('tanggal_berakhir', $promo->tanggal_berakhir->format('Y-m-d')) }}" required>
                             @error('tanggal_berakhir')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -74,9 +77,8 @@
                 <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
                     <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
-                        <option value="">Pilih Status</option>
-                        <option value="aktif" {{ old('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                        <option value="nonaktif" {{ old('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                        <option value="aktif" {{ old('status', $promo->status) == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                        <option value="nonaktif" {{ old('status', $promo->status) == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
                     </select>
                     @error('status')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -92,4 +94,4 @@
         </div>
     </div>
 </div>
-@endsection 
+@endsection

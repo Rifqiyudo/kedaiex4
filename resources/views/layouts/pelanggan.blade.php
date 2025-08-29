@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="icon" href="{{ asset('images/logo.jpeg') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
     <style>
         :root {
             --coffee-dark: #2C1810;
@@ -382,127 +384,127 @@
         }
 
         .produk-scroll-wrapper {
-        display: flex;
-        gap: 1.5rem;
-        overflow-x: auto;
-        scroll-behavior: smooth;
-        user-select: none;
-        cursor: grab;
-         
-        padding-bottom: 1rem;
-    }   
-    
-    .produk-scroll-wrapper.dragging {
-        cursor: grabbing;
-    }
-
-    .produk-scroll-wrapper::-webkit-scrollbar {
-        display: none;
-    }
-
-    .produk-card {
-        flex: 0 0 calc((100% - 3rem) / 3);
-        max-width: calc((100% - 3rem) / 3);
-        background: white;
-        border-radius: 15px;
-        overflow: hidden;   
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        transition: transform 0.3s ease;
-    }
-
-    .produk-card:hover {
-        transform: scale(1.03);
-    }
-
-    .produk-img {
-        height: 400px;
-        overflow: hidden;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-    }
-
-    .produk-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-    }
-
-    .produk-img:hover img {
-        transform: scale(1.05);
-    }
-
-    @media (max-width: 992px) {
-        .produk-card {
-            flex: 0 0 70%;
-            max-width: 70%;
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            user-select: none;
+            cursor: grab;
+            
+            padding-bottom: 1rem;
+        }   
+        
+        .produk-scroll-wrapper.dragging {
+            cursor: grabbing;
         }
-    }
 
-    @media (max-width: 576px) {
-        .produk-card {
-            flex: 0 0 90%;
-            max-width: 90%;
+        .produk-scroll-wrapper::-webkit-scrollbar {
+            display: none;
         }
-    }
 
-    .position-relative {
-    position: relative;
-    }
+        .produk-card {
+            flex: 0 0 calc((100% - 3rem) / 3);
+            max-width: calc((100% - 3rem) / 3);
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;   
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
 
-    .btn-panah {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 10;
-        background-color: rgba(74, 103, 65, 0.9);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
+        .produk-card:hover {
+            transform: scale(1.03);
+        }
 
-    .btn-panah:hover {
-        background-color: #4A6741;
-    }
+        .produk-img {
+            height: 400px;
+            overflow: hidden;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
 
-    .btn-panah.left {
-        left: -20px;
-    }
+        .produk-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
 
-    .btn-panah.right {
-        right: -20px;
-    }
-    ::-webkit-scrollbar {
-        width: 14px;
-        height: 18px;
-    }
+        .produk-img:hover img {
+            transform: scale(1.05);
+        }
 
-    ::-webkit-scrollbar-track {
-        background: #f3f1e7; 
-        border-radius: 10px;
-    }
+        @media (max-width: 992px) {
+            .produk-card {
+                flex: 0 0 70%;
+                max-width: 70%;
+            }
+        }
 
-    ::-webkit-scrollbar-thumb {
-        background: var(--accent-gold);
-        border-radius: 10px;
-        border: 2px solid #f3f1e7; 
-    }
+        @media (max-width: 576px) {
+            .produk-card {
+                flex: 0 0 90%;
+                max-width: 90%;
+            }
+        }
 
-    ::-webkit-scrollbar-thumb:hover {
-        background: #d4af37cc; 
-    }
+        .position-relative {
+        position: relative;
+        }
 
-    .user-info::after {
-        display: none !important;
-    }
+        .btn-panah {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background-color: rgba(74, 103, 65, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        .btn-panah:hover {
+            background-color: #4A6741;
+        }
+
+        .btn-panah.left {
+            left: -20px;
+        }
+
+        .btn-panah.right {
+            right: -20px;
+        }
+        ::-webkit-scrollbar {
+            width: 14px;
+            height: 18px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f3f1e7; 
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gold);
+            border-radius: 10px;
+            border: 2px solid #f3f1e7; 
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37cc; 
+        }
+
+        .user-info::after {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -592,8 +594,31 @@
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.ulasan-swiper', {
+            slidesPerView: 3,
+            spaceBetween: 20,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                },
+                768: {
+                    slidesPerView: 2,
+                },
+                992: {
+                    slidesPerView: 3,
+                }
+            }
+        });
+    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const stars = document.querySelectorAll('#starRating .star');
@@ -657,5 +682,6 @@
             scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         });
     </script>
+    @yield('scripts')
 </body>
 </html> 

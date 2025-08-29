@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pelanggan;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Order;
@@ -12,17 +13,34 @@ use App\Models\Promo;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->get();
-        // Cari promo aktif (status aktif, tanggal berlaku)
+        $query = Product::with('category');
+
+        // Filtering kategori
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        // Search nama produk
+        if ($request->filled('search')) {
+            $query->where('nama', 'like', '%' . $request->search . '%');
+        }
+
+        $products = $query->get();
+
+        // Cari promo aktif
         $today = date('Y-m-d');
         $promo = Promo::where('status', 'aktif')
             ->where('tanggal_mulai', '<=', $today)
             ->where('tanggal_berakhir', '>=', $today)
             ->orderByDesc('diskon')
             ->first();
-        return view('pelanggan.produk.index', compact('products', 'promo'));
+
+        $categories = Category::all();
+        
+
+        return view('pelanggan.produk.index', compact('products', 'promo', 'categories'));
     }
 
     public function order(Request $request)

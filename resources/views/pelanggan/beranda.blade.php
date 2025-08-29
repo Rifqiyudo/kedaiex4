@@ -116,35 +116,68 @@
     </section>
     <section class="px-5" >
     
-    <div class="row mt-5 mb-4 align-items-center">
-            <div class="col-md-6">
-                <div class="map-container shadow rounded-4 overflow-hidden" style="border: 2px solid #eee;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d494.640406940915!2d112.63909422799871!3d-7.3400529255439215!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fdd7bc74382d%3A0x7c6b7e44463aa167!2sEXFOUR!5e0!3m2!1sid!2sid!4v1751382044861!5m2!1sid!2sid"  width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="row mt-5 mb-4 align-items-center">
+                <div class="col-md-6">
+                    <div class="map-container shadow rounded-4 overflow-hidden" style="border: 2px solid #eee;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d494.640406940915!2d112.63909422799871!3d-7.3400529255439215!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fdd7bc74382d%3A0x7c6b7e44463aa167!2sEXFOUR!5e0!3m2!1sid!2sid!4v1751382044861!5m2!1sid!2sid"  width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
+                    </div>
+                </div>
+                <div class="col-md-6 mt-5 mt-md-0">
+                    <h3 class="fw-bold" style="color:#4A6741;">
+                        <i class="bi bi-geo-alt-fill me-2"></i>Kunjungi Kedai ExFour
+                    </h3>
+                    <p style="font-size: 1.1rem; color:#6B4423;">
+                        ExFour hadir untuk menemani harimu dengan kopi berkualitas dan tempat yang nyaman. Lokasi kami strategis dan mudah diakses, cocok untuk santai, kerja, atau ngobrol santai bersama teman.
+                    </p>
+                    <ul class="list-unstyled mt-3" style="color:#4A6741; font-size:1rem;">
+                        <li><i class="bi bi-cup-hot-fill me-2"></i>Racikan kopi khas dan original</li>
+                        <li><i class="bi bi-wifi me-2"></i>Fasilitas WiFi gratis & colokan</li>
+                        <li><i class="bi bi-people-fill me-2"></i>Tempat nyaman untuk hangout</li>
+                        <li><i class="bi bi-clock-fill me-2"></i>Buka setiap hari, 08.00–22.00 WIB</li>
+                    </ul>
+
+                    <a href="https://maps.app.goo.gl/9Q4JWRMf53JiuZEE7" target="_blank" class="btn btn-outline-success mt-3">
+                        <i class="bi bi-map me-1"></i> Buka di Google Maps
+                    </a>
                 </div>
             </div>
-            <div class="col-md-6 mt-5 mt-md-0">
-                <h3 class="fw-bold" style="color:#4A6741;">
-                    <i class="bi bi-geo-alt-fill me-2"></i>Kunjungi Kedai ExFour
-                </h3>
-                <p style="font-size: 1.1rem; color:#6B4423;">
-                    ExFour hadir untuk menemani harimu dengan kopi berkualitas dan tempat yang nyaman. Lokasi kami strategis dan mudah diakses, cocok untuk santai, kerja, atau ngobrol santai bersama teman.
-                </p>
-                <ul class="list-unstyled mt-3" style="color:#4A6741; font-size:1rem;">
-                    <li><i class="bi bi-cup-hot-fill me-2"></i>Racikan kopi khas dan original</li>
-                    <li><i class="bi bi-wifi me-2"></i>Fasilitas WiFi gratis & colokan</li>
-                    <li><i class="bi bi-people-fill me-2"></i>Tempat nyaman untuk hangout</li>
-                    <li><i class="bi bi-clock-fill me-2"></i>Buka setiap hari, 08.00–22.00 WIB</li>
-                </ul>
 
-                <a href="https://maps.app.goo.gl/9Q4JWRMf53JiuZEE7" target="_blank" class="btn btn-outline-success mt-3">
-                    <i class="bi bi-map me-1"></i> Buka di Google Maps
-                </a>
-            </div>
+
+        
+        </div>
+    </section>
+    <div class="container">
+        <div class="text-center mb-4">
+            <h4 class="fw-bold" style="color:#4A6741;">Ulasan Pelanggan</h4>
+            <p class="text-muted">Apa kata pelanggan setia kami?</p>
         </div>
 
-
-    
+        <!-- Swiper -->
+        <div class="swiper ulasan-swiper">
+            <div class="swiper-wrapper">
+                @foreach($ulasan as $u)
+                    <div class="swiper-slide">
+                        <div class="card p-3 shadow-sm" style="border-radius: 1rem;">
+                            <div class=" fw-bold"><h5>{{ $u->user->name }}</h5></div>
+                            <div class="text-gold mb-2">Produk: {{ $u->order->orderItems->first()->product->nama  }}</div>
+                            <div class="mb-1">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if($i <= $u->rating)
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    @else
+                                        <i class="bi bi-star text-muted"></i>
+                                    @endif
+                                @endfor
+                            </div>
+                            <p class="text-muted">{{ $u->review }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <!-- Navigation buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
     </div>
-    </section>
 @endsection 

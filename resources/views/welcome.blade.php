@@ -142,4 +142,40 @@
         
         </div>
     </section>
+    <section class="px-5 py-5 bg-light" style="border-radius: 1rem">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h4 class="fw-bold" style="color:#4A6741;">Ulasan Pelanggan</h4>
+            <p class="text-muted">Apa kata pelanggan setia kami?</p>
+        </div>
+
+        <!-- Swiper -->
+        <div class="swiper ulasan-swiper">
+            <div class="swiper-wrapper">
+                @foreach($ulasan as $u)
+                    <div class="swiper-slide">
+                        <div class="card p-3 shadow-sm" style="border-radius: 1rem;">
+                            <div class=" fw-bold"><h5>{{ $u->user->name }}</h5></div>
+                            <div class="text-gold mb-2">Produk: {{ $u->order->orderItems->first()->product->nama  }}</div>
+                            <div class="mb-1">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if($i <= $u->rating)
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    @else
+                                        <i class="bi bi-star text-muted"></i>
+                                    @endif
+                                @endfor
+                            </div>
+                            <p class="text-muted">{{ $u->review }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <!-- Navigation buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</section>
+
 @endsection 

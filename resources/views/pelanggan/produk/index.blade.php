@@ -10,6 +10,26 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 @endif
+<form action="{{ route('pelanggan.produk.index') }}" method="GET" class="mb-4">
+    <div class="row g-2">
+        <div class="col-md-8">
+            <input type="text" name="search" value="{{ request('search') }}" class="form-control" placeholder="Cari produk...">
+        </div>
+        <div class="col-md-3">
+            <select name="category_id" class="form-select" onchange="this.form.submit()">
+                <option value="">Semua Kategori</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->nama }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-1">
+            <a href="{{ route('pelanggan.produk.index') }}" class="btn btn-secondary w-100">Reset</a>
+        </div>
+    </div>
+</form>
 <div class="row">
     @foreach($products as $product)
     <div class="col-md-4 mb-4">
