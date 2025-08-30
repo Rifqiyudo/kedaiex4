@@ -41,7 +41,8 @@ class TransaksiController extends Controller
         $message .= "Terima kasih! Pembayaran untuk pesanan #{$order->id} telah *berhasil*.\n\n";
         $message .= "📅 Tanggal: " . $order->created_at->format('d M Y H:i') . "\n";
         $message .= "💰 Total: Rp " . number_format($order->total, 0, ',', '.') . "\n";
-        $message .= "💳 Metode: " . ucfirst($order->metode_pembayaran) . "\n\n";
+        $message .= "💳 Metode Pembayaran: " . ucfirst($order->metode_pembayaran) . "\n\n";
+        $message .= "📌 Tipe Pesanan: " . ucfirst($order->tipe_pesanan) . "\n\n";
         $message .= "Pesanan Anda sedang diproses. Kami akan segera menyiapkannya.\n\n";
         $message .= "Salam hangat,\nKedai ExFour";
         $nomorTujuan = $this->normalizePhoneNumber($order->user->no_telp);

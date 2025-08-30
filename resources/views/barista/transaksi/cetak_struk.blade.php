@@ -107,8 +107,9 @@
             <strong>Pelanggan:</strong> {{ $order->user->name ?? '-' }}<br>
             <strong>Email:</strong> {{ $order->user->email ?? '-' }}    <br>
             <strong>Telepon:</strong> {{ $order->user->no_telp ?? '-' }}<br>
-            <strong>Alamat:</strong> {{ $order->user->alamat ?? '-' }}  
-
+            <strong>Alamat:</strong> {{ $order->user->alamat ?? '-' }}  <br>
+            <strong>Tipe Pesanan:</strong> {{ $order->tipe_pesanan ?? '-' }}<br>
+            <strong>Metode Pembayaran:</strong> {{ $order->metode_pembayaran ?? '-' }}<br>
         </div>
 
         <table class="table table-bordered mb-3">
