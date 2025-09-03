@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - Kedai Exfour</title>
+     <meta name="google-site-verification" content="onfuPhXHmEmIFo8K59auRBmyREiW1GVeHuYW0Fw6_K0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="icon" href="{{ asset('images/logo.jpeg') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <meta name="description" content="Kedai ExFour menyediakan produk terbaik dengan kualitas premium dan pelayanan ramah.">
+    <meta name="keywords" content="kedai exfour, kopi, minuman, makanan, promo, cafe">
+    <meta name="author" content="Kedai ExFour">
+    <meta property="og:title" content="Kedai ExFour - Dashboard Pelanggan">
+    <meta property="og:description" content="Kelola kategori, produk, promo, transaksi, dan laporan Kedai ExFour.">
+    <meta property="og:image" content="{{ asset('images/logo.jpeg') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
 
     <style>
     
@@ -434,18 +443,43 @@
         .produk-img:hover img {
             transform: scale(1.05);
         }
+        .hero-title{
+            font-size: 2rem
+        }
+        .hero-subtitle{
+            font-size: 1.2rem;
+        }
 
         @media (max-width: 992px) {
             .produk-card {
                 flex: 0 0 70%;
                 max-width: 70%;
             }
+            .main-content{
+                padding: 30px 10px;
+            }
+            .hero-title{
+                font-size: 1.75rem !important;
+            }
+            .hero-subtitle{
+                font-size: 1rem !important;
+            }
+            
         }
 
         @media (max-width: 576px) {
             .produk-card {
                 flex: 0 0 90%;
                 max-width: 90%;
+            }
+            .main-content{
+                padding: 30px 10px;
+            }
+            .hero-title{
+                font-size: 1.5rem !important;
+            }
+            .hero-subtitle{
+                font-size: 0.75rem !important;
             }
         }
 
@@ -484,6 +518,8 @@
             right: -20px;
         }
         
+        
+    
         ::-webkit-scrollbar {
             width: 14px;
             height: 18px;

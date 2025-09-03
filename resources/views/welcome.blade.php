@@ -3,7 +3,7 @@
 @section('title', 'Beranda')
 
 @section('content')
-    <div class="container-fluid px-5">
+    <div class="container-fluid px-3 px-md-1">
         <div id="heroCarousel" class="carousel slide carousel-fade mb-5 position-relative rounded-4 overflow-hidden" data-bs-ride="carousel" data-bs-interval="5000">
             <div class="carousel-inner" style="height: 450px;">
                 {{-- Slide 1 --}}
@@ -22,8 +22,8 @@
 
             {{-- Teks di atas gambar --}}
             <div class="position-absolute top-50 start-50 translate-middle text-center text-white px-3" style="z-index: 3;">
-                <h1 class="display-5 fw-bold">Selamat Datang di Kedai ExFour</h1>
-                <p class="lead">Nikmati kopi berkualitas dengan suasana yang nyaman dan hangat</p>
+                <h1 class="fw-bold hero-title">Selamat Datang di Kedai ExFour</h1>
+                <p class="lead hero-subtitle">Nikmati kopi berkualitas dengan suasana yang nyaman dan hangat</p>
                 <a href="#tentang" class="btn btn-outline-light mt-3">Lihat Selengkapnya</a>
             </div>
 
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <section class="px-5" id="tentang" >
+    <section class="px-3 px-md-3" id="tentang" >
         <div class="container">
             <div class="row align-items-center">
                 {{-- Teks di kiri --}}
@@ -55,7 +55,7 @@
         </div>
     </section>
 
-    <section class="px-5 py-5" >
+    <section class="px-3 px-md-3" >
             <div class="container">
             <div class="row mt-1 mb-4 justify-content-center text-center">
                 <div class="col-md-10">
@@ -81,7 +81,7 @@
             </div>
             </div>
     </section>
-    <section class="px-5 py-5 bg-light" style="border-radius: 1rem">
+    <section class="px-3 px-md-3 py-5 bg-light" style="border-radius: 1rem">
             <div class="container">
                 <div class="text-center mb-4">
                     <h4 class="fw-bold" style="color:#4A6741;">Produk Populer Kami</h4>
@@ -110,7 +110,7 @@
                 </div>
             </div>
     </section>
-    <section class="px-5" >
+    <section class="px-3 px-md-3" >
         <div class="row mt-5 mb-4 align-items-center">
                 <div class="col-md-6">
                     <div class="map-container shadow rounded-4 overflow-hidden" style="border: 2px solid #eee;">
@@ -142,7 +142,7 @@
         
         </div>
     </section>
-    <section class="px-5 py-5 bg-light" style="border-radius: 1rem">
+    <section class="px-3 px-md-3 py-5 bg-light" style="border-radius: 1rem">
     <div class="container">
         <div class="text-center mb-4">
             <h4 class="fw-bold" style="color:#4A6741;">Ulasan Pelanggan</h4>

@@ -1,0 +1,12 @@
+1. masuk GitHub, link https://github.com/Rifqiyudo/kedaiex4
+2. Download ZIP
+3. Extract ZIP
+4. Open di VSCode
+
+Langkah Setup
+1. Buka terminal, ketik composer install
+2. Buat terminal baru, ketik npm install
+3. Masukkan .env yang tak kirim di wa, soale yang di GitHub gaada .env
+4. di terminal ketik php artisan migrate:fresh (kalau udah ada database yang sebelumnya, kalau belum ada pakai php artisan migrate aja)
+5. di terminal ketik php artisan migrate --seed
+6. Buka di 127.0.0.1:8000 dengan jalankan bersamaan php artisan serve dan npm run dev
